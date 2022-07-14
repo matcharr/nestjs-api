@@ -1,8 +1,8 @@
-# image: gitpod/workspace-postgres
 ---
 #
 # Learn more about this Gitpod configuration file in the documentation at https://www.gitpod.io/docs/configuration
 #
+# image: gitpod/workspace-postgres
 ports:
   - name: Nestjs App
     description: The main application web server
@@ -18,35 +18,36 @@ ports:
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks
 tasks:
   - init: |
+      npm i -g @nestjs/cli
       npm install
     command: |
-        npm run start:dev
-        docker-compose pull
+      npm run start:dev
+      docker-compose pull
     env:
       DATABASE_URL: postgresql://postgres:123@localhost:5434/nest?schema=public
-
+      JWT_SECRET: super-secret
   - command: |
       docker-compose up dev-db -d
     env:
       DATABASE_URL: postgresql://postgres:123@localhost:5434/nest?schema=public
-
+      JWT_SECRET: super-secret
 github:
   prebuilds:
     # enable for the master/default branch (defaults to true)
     master: true
-# enable for all branches in this repo (defaults to false)
+    # enable for all branches in this repo (defaults to false)
     branches: true
-# enable for pull requests coming from this repo (defaults to true)
+    # enable for pull requests coming from this repo (defaults to true)
     pullRequests: true
-# enable for pull requests coming from forks (defaults to false)
+    # enable for pull requests coming from forks (defaults to false)
     pullRequestsFromForks: true
-# add a check to pull requests (defaults to true)
+    # add a check to pull requests (defaults to true)
     addCheck: true
-# add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
     addComment: false
-# add a "Review in Gitpod" button to the pull request's description (defaults to false)
+    # add a "Review in Gitpod" button to the pull request's description (defaults to false)
     addBadge: true
-# add a label once the prebuild is ready to pull requests (defaults to false)
+    # add a label once the prebuild is ready to pull requests (defaults to false)
     addLabel: false
 
 vscode:
@@ -57,3 +58,5 @@ vscode:
     - ms-azuretools.vscode-docker
     - oderwat.indent-rainbow
     - prisma.prisma
+    - equinusocio.vsc-community-material-theme
+    - equinusocio.vsc-material-theme-icons
