@@ -18,8 +18,7 @@ ports:
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks
 tasks:
   - init: |
-      npm i -g @nestjs/cli
-      npm install
+      npm install -g @nestjs/cli
     command: |
       npm run start:dev
       # docker-compose pull
@@ -28,6 +27,7 @@ tasks:
       JWT_SECRET: super-secret
   - command: |
       docker-compose up dev-db -d
+      npx prisma sutdio
     env:
       DATABASE_URL: postgresql://postgres:123@localhost:5434/nest?schema=public
       JWT_SECRET: super-secret
