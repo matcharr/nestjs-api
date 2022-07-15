@@ -10,7 +10,7 @@ tasks:
   - name: Database
     init: >
       npm init -y &&
-      npm install prisma typescript ts-node @types/node --save-dev &&
+      npm install prisma typescript ts-node @types/node --save-dev
     command: >
       npm run db:dev:restart &&
       npx prisma studio
