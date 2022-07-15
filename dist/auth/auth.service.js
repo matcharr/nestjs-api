@@ -11,11 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
 const argon = require("argon2");
 const runtime_1 = require("@prisma/client/runtime");
 const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
+const prisma_service_1 = require("../prisma/prisma.service");
 let AuthService = class AuthService {
     constructor(prisma, jwt, config) {
         this.prisma = prisma;
@@ -55,16 +55,19 @@ let AuthService = class AuthService {
             throw new common_1.ForbiddenException("Credentials incorrect");
         return this.signToken(user.id, user.email);
     }
-    signToken(userId, email) {
+    async signToken(userId, email) {
         const payload = {
             sub: userId,
             email,
         };
         const secret = this.config.get("JWT_SECRET");
-        return this.jwt.signAsync(payload, {
+        const token = await this.jwt.signAsync(payload, {
             expiresIn: "15m",
             secret: secret,
         });
+        return {
+            access_token: token,
+        };
     }
 };
 AuthService = __decorate([

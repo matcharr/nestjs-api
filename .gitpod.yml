@@ -5,7 +5,7 @@
 ports:
   - port: 3000
     onOpen: ignore
-  - port: 5434
+  - port: 5434-5435
     onOpen: ignore
   - port: 5432
     onOpen: ignore
@@ -52,6 +52,5 @@ vscode:
     - ms-azuretools.vscode-docker
     - oderwat.indent-rainbow
     - prisma.prisma
-    - equinusocio.vsc-community-material-theme
-    - equinusocio.vsc-material-theme-icons
     - Equinusocio.vsc-community-material-theme
+    - equinusocio.vsc-material-theme-icons
