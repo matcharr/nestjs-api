@@ -1,49 +1,44 @@
----
+# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks
+tasks:
+  - before: | 
+      npm install --location=global @nestjs/cli
+  
+  - name: Dependencies & Database
+    init: |
+      npm install
+      npm run db:dev:restart
+    command: |
+      npm run start:dev
+  
+  - name: Database Studio
+    command: |
+      npx prisma studio
+
 #
 # Learn more about this Gitpod configuration file in the documentation at https://www.gitpod.io/docs/configuration
 #
-# image: gitpod/workspace-postgres
 ports:
-  - name: Nestjs App
-    description: The main application web server
-    port: 3000
-    onOpen: ignore
-  - name: nestjsDB
-    description: The main DB
-    port: 5434
+  - port: 3000
     onOpen: ignore
   - port: 5432
     onOpen: ignore
 
-# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks
-tasks:
-  - init: |
-      npm install
-      npm install -g @nestjs/cli
-    command: |
-      npm run start:dev
-  - command: |
-      docker-compose up dev-db -d
-      npx prisma sutdio
-
 github:
   prebuilds:
-    # enable for the master/default branch (defaults to true)
+    # enable for the default branch (defaults to true)
     master: true
     # enable for all branches in this repo (defaults to false)
-    branches: true
+    branches: false
     # enable for pull requests coming from this repo (defaults to true)
     pullRequests: true
     # enable for pull requests coming from forks (defaults to false)
-    pullRequestsFromForks: true
+    pullRequestsFromForks: false
     # add a check to pull requests (defaults to true)
     addCheck: true
     # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
     addComment: false
     # add a "Review in Gitpod" button to the pull request's description (defaults to false)
-    addBadge: true
-    # add a label once the prebuild is ready to pull requests (defaults to false)
-    addLabel: false
+    addBadge: false
 
 vscode:
   extensions:
