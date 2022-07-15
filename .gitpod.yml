@@ -2,16 +2,17 @@
 tasks:
   - before: | 
       npm install --location=global @nestjs/cli
+
+  - name: Dependencies
+    init: npm install 
+    command: npm run start:dev
   
-  - name: Dependencies & Database
-    init: |
-      npm install
-      npm run db:dev:restart
-    command: |
-      npm run start:dev
-  
-  - name: Database Studio
-    command: |
+  - name: Database
+    init: >
+      npm init -y &&
+      npm install prisma typescript ts-node @types/node --save-dev &&
+    command: >
+      npm run db:dev:restart &&
       npx prisma studio
 
 #
