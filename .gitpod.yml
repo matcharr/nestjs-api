@@ -19,18 +19,13 @@ ports:
 tasks:
   - init: |
       npm install
+      npm install -g @nestjs/cli
     command: |
       npm run start:dev
-      # docker-compose pull
-    env:
-      DATABASE_URL: postgresql://postgres:123@localhost:5434/nest?schema=public
-      JWT_SECRET: super-secret
   - command: |
       docker-compose up dev-db -d
       npx prisma sutdio
-    env:
-      DATABASE_URL: postgresql://postgres:123@localhost:5434/nest?schema=public
-      JWT_SECRET: super-secret
+
 github:
   prebuilds:
     # enable for the master/default branch (defaults to true)
